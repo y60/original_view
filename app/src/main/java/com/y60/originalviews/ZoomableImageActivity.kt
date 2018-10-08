@@ -32,7 +32,7 @@ class ZoomableImageActivity : AppCompatActivity() {
                 val view = layoutInflater.inflate(R.layout.image, container,false) as ZoomableImageView
                 container.addView(view)
                 view.setImageResource(res[position])
-                view.setPager(pager)
+                view.setZoomListener(pager)
                 return view
             }
 

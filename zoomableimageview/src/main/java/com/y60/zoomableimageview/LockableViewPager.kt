@@ -5,15 +5,16 @@ import android.support.v4.view.ViewPager
 import android.util.AttributeSet
 import android.view.MotionEvent
 
-class LockableViewPager : ViewPager {
+class LockableViewPager : ViewPager,ZoomListener {
+
     private var locked = false
 
     constructor(context: Context) : super(context)
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
-    fun setLocked(locked: Boolean) {
-        this.locked = locked
+    override fun onZoomStateChanged(zooming:Boolean) {
+        this.locked = zooming
     }
 
     override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {

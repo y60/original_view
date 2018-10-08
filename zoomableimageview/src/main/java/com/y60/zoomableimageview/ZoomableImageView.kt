@@ -19,7 +19,8 @@ class ZoomableImageView : android.support.v7.widget.AppCompatImageView, ScaleGes
     private var gestureDetector: GestureDetector? = null
     private var defaultValues: FloatArray? = null
 
-    private var pager: LockableViewPager? = null
+    private var listener: ZoomListener? = null
+    private var zooming = false;
 
     private var defaultScale: Float = 0f
     private var isLandscape = true //上下が余るならtrue
@@ -79,8 +80,8 @@ class ZoomableImageView : android.support.v7.widget.AppCompatImageView, ScaleGes
         })
     }
 
-    fun setPager(pager: LockableViewPager) {
-        this.pager = pager
+    fun setZoomListener(listener: ZoomListener) {
+        this.listener = listener
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
@@ -147,8 +148,10 @@ class ZoomableImageView : android.support.v7.widget.AppCompatImageView, ScaleGes
         } else if (event.pointerCount > 1) {//2点以上になったとき
             singleStartX = Float.NaN//1点タッチでなくなったことを保存
         }
-
-        pager!!.setLocked(values[Matrix.MSCALE_X] != defaultScale)
+        if(zooming != ( values[Matrix.MSCALE_X] != defaultScale)) {
+            zooming = !zooming
+            if(listener!=null)listener!!.onZoomStateChanged(zooming)
+        }
         return true
     }
 
