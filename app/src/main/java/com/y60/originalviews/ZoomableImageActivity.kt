@@ -14,13 +14,12 @@ class ZoomableImageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_zoomable_image)
 
-        pager.offscreenPageLimit = 4
+        pager.offscreenPageLimit = 3
 
-        val res = IntArray(4)
-        res[0]=R.drawable.ic_launcher_background
-        res[1]=R.drawable.ic_launcher_foreground
-        res[2]=R.drawable.ic_launcher_background
-        res[3]=R.drawable.ic_launcher_background
+        val res = IntArray(3)
+        res[0]=R.drawable.louvre
+        res[1]=R.drawable.eiffel
+        res[2]=R.drawable.champs
 
         val pagerAdapter = object : PagerAdapter() {
 
